@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jim Dave | Cloud & Wordpress Web Developer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+    <div class="logo">JM</div>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#case">Case Study</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>Cloud Infrastructure Meets Revenue Strategy</h1>
+        <p>
+            AWS Cloud Practitioner • Email Marketing Strategist • Wordpress Web Developer
+        </p>
+        <a href="#contact" class="btn-primary">Book Consultation</a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section split">
+    <div class="text">
+        <h2>Bridging Technology & Business Growth</h2>
+        <p>
+            I design secure cloud infrastructure, build premium WordPress websites,
+            and develop conversion-driven email systems that turn traffic into revenue.
+        </p>
+        <p>
+            My approach combines technical architecture with marketing psychology
+            to create scalable digital ecosystems.
+        </p>
+    </div>
+    <div class="image-box">
+        <img src="images/consulting.jpg" alt="Consulting">
+    </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise" class="section dark">
+    <h2>Core Expertise</h2>
+    <div class="cards">
+
+        <div class="card">
+            <h3>Cloud Architecture</h3>
+            <p>Secure static hosting, infrastructure setup, deployment optimization.</p>
+        </div>
+
+        <div class="card">
+            <h3>Email Marketing Systems</h3>
+            <p>Automated funnels, list growth, conversion optimization.</p>
+        </div>
+
+        <div class="card">
+            <h3>WordPress Development</h3>
+            <p>High-performance business websites built for credibility.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- CASE STUDY -->
+<section id="case" class="section split">
+    <div class="image-box">
+        <img src="images/safari.jpg" alt="Wild Mystery Safaris">
+    </div>
+
+    <div class="text">
+        <h2>Case Study: Wild Mystery Safaris</h2>
+        <p>
+            Designed and launched a luxury safari travel website
+            targeting international tourists.
+        </p>
+        <p>
+            Focus: premium branding, performance optimization,
+            and international customer trust.
+        </p>
+
+        <a href="https://wildmysterysafari.com" target="_blank" class="btn-outline">
+            View Live Website
+        </a>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section contact">
+    <h2>Let’s Build Something Exceptional</h2>
+
+    <form id="contactForm" class="contact-form">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn-primary">Send Message</button>
+    </form>
+
+    <div id="responseMessage" class="form-response"></div>
+</section>
+
+<footer>
+    © 2026 Jim Dave | Wordpress Web Developer & Cloud Practitioner. All Rights Reserved.
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const responseDiv = document.getElementById("responseMessage");
+    responseDiv.innerHTML = "Sending...";
+    responseDiv.style.color = "white";
+
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    };
+
+    try {
+        const response = await fetch("https://b835kr1xa6.execute-api.us-east-1.amazonaws.com/prod/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            responseDiv.innerHTML = "Message sent successfully!";
+            responseDiv.style.color = "lightgreen";
+            document.getElementById("contactForm").reset();
+        } else {
+            responseDiv.innerHTML = "Something went wrong.";
+            responseDiv.style.color = "red";
+        }
+
+    } catch (error) {
+        responseDiv.innerHTML = "Error connecting to server.";
+        responseDiv.style.color = "red";
+    }
+});
+</script>
+
+</body>
+</html>
